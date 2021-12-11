@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# set fallback data destination
+if [ -z "$XDG_DATA_HOME" ]; then
+  XDG_DATA_HOME=~/.local/share
+fi
+
+stations_file="$XDG_DATA_HOME"/radio/stations
+
+station=$(cut -d '|' -f 1 "$stations_file" | fzf)
+
+# exit if no selection was made
+if [ -z "$station" ]; then
+  exit 0
+fi
+
+grep "^$station" "$stations_file" | cut -d '|' -f 2 | mpv --playlist=-
