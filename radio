@@ -14,4 +14,4 @@ if [ -z "$station" ]; then
   exit 0
 fi
 
-grep "^$station" "$stations_file" | cut -d '|' -f 2 | mpv --playlist=- --really-quiet --msg-level=display-tags=status,statusline=status
+grep -F "$station" "$stations_file" | cut -d '|' -f 2 | mpv --playlist=- --really-quiet --msg-level=display-tags=status,statusline=status
